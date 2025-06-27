@@ -14,38 +14,56 @@ function Login() {
   const [studentProfile, setStudentProfile] = useState({
     fullName: "",
     userName: "",
+    email: "",
+    password: ""
+  });
+  const [error, setError] = useState({
+    fullName: "",
+    userName: "",
     password: "",
+     email: ""
   });
 
   const [passwordDisplay, setPasswordDisplay] = useState(false)
 
   const navigate = useNavigate()
 
-  const [error, setError] = useState("");
-
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { fullName, userName, password } = studentProfile;
+    const { fullName, userName, email, password } = studentProfile;
 
-    if (!fullName.trim()) return setError("Full name is required.");
-    if (!userName.trim()) return setError("Username is required.");
-    if (!password) return setError("Password is required.");
+    const newError = {}
+
+    if (!fullName.trim()) newError.fullName = "Fullname is required.";
+    if (!userName.trim()) newError.userName = "Username is required."
+    if (!email.trim()) newError.email = "Email is required."
+    if (!password) newError.password = "Password is required."
+
 
     const hasUppercase = /[A-Z]/.test(password);
     const hasLowerCase = /[a-z]/.test(password);
     const isLongEnough = password.length >= 8;
+    const isValid = /^[\w.-]+@gmail\.com$/.test(email)
 
-    if (!hasUppercase || !hasLowerCase || !isLongEnough) {
-      return setError(
-        "Password must have at least 8 characters, one uppercase letter, and one lowercase letter."
-      );
+    if (password && (!hasUppercase || !hasLowerCase || !isLongEnough)) {
+      newError.password = "Password must have at least 8 characters, one uppercase letter, and one lowercase letter."
     }
+   if(email && !isValid){
+      newError.email = "Invalid Email"
+    }
+
+    if (Object.keys(newError).length > 0) {
+  setError(newError);
+  return;
+}
 
     localStorage.setItem("studentInfo", JSON.stringify(studentProfile));
     setError("");
 
     navigate('/dashboard')
+    
 
   };
 
@@ -92,6 +110,7 @@ function Login() {
                 />
               </div>
             </div>
+            {error.fullName && <p  className="text-red-500">{error.fullName}</p>}
 
             <div>
               <label htmlFor="username" className="text-sm font-semibold">Username</label>
@@ -111,6 +130,28 @@ function Login() {
                 />
               </div>
             </div>
+             {error.userName && <p  className="text-red-500">{error.userName}</p>}
+
+
+             <div>
+              <label htmlFor="email" className="text-sm font-semibold">Email</label>
+              <div className="flex items-center border border-black rounded-md h-12 px-2">
+                <img src={UserIcon} alt="User Icon" />
+                <input
+                id="email"
+                  type="text"
+                  value={studentProfile.email}
+                  onChange={(e) =>
+                    setStudentProfile({
+                      ...studentProfile,
+                      email: e.target.value,
+                    })
+                  }
+                  className="outline-none w-full px-2 text-sm"
+                />
+              </div>
+            </div>
+                   {error.email && <p className="text-red-500">{error.email}</p>}
 
             <div>
               <label htmlFor="password" className="text-sm font-semibold">Password</label>
@@ -128,12 +169,13 @@ function Login() {
                   }
                   className= 'outline-none w-full px-2 text-sm'
                 />
+
                 <button type="button" onClick={() => setPasswordDisplay(!passwordDisplay)}>
-                  <img src={EyeIcon} alt="Toggle Password" className="ml-2" />
+                  <img src={EyeIcon} alt="Toggle Password Visibility" className="ml-2" />
                 </button>
               </div>
             </div>
-
+             {error.password && <p className="text-red-500">{error.password}</p>}
             <div className="text-xs space-y-1">
               <p className="text-gray-700">A strong password should include:</p>
               <p className="flex items-center">
@@ -159,7 +201,6 @@ function Login() {
                 />
                 Lowercase letter
               </p>
-              {error && <p className="text-red-600">{error}</p>}
             </div>
 
             <button
