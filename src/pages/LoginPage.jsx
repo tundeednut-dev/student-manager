@@ -11,7 +11,7 @@ import CheckCircle from "../assets/CheckCircle.png";
 import Vector from "../assets/Vector.png";
 
 function Login() {
-  const [studentProfile, setStudentProfile] = useState({
+  const [userProfile, setUserProfile] = useState({
     fullName: "",
     userName: "",
     email: "",
@@ -32,7 +32,7 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { fullName, userName, email, password } = studentProfile;
+    const { fullName, userName, email, password } = userProfile;
 
     const newError = {}
 
@@ -59,7 +59,7 @@ function Login() {
   return;
 }
 
-    localStorage.setItem("studentInfo", JSON.stringify(studentProfile));
+    localStorage.setItem("userInfo", JSON.stringify(userProfile));
     setError("");
 
     navigate('/dashboard')
@@ -99,10 +99,10 @@ function Login() {
                 <input
                 id="fullname"
                   type="text"
-                  value={studentProfile.fullName}
+                  value={userProfile.fullName}
                   onChange={(e) =>
-                    setStudentProfile({
-                      ...studentProfile,
+                    setUserProfile({
+                      ...userProfile,
                       fullName: e.target.value,
                     })
                   }
@@ -119,10 +119,10 @@ function Login() {
                 <input
                 id="username"
                   type="text"
-                  value={studentProfile.userName}
+                  value={userProfile.userName}
                   onChange={(e) =>
-                    setStudentProfile({
-                      ...studentProfile,
+                    setUserProfile({
+                      ...userProfile,
                       userName: e.target.value,
                     })
                   }
@@ -140,10 +140,10 @@ function Login() {
                 <input
                 id="email"
                   type="text"
-                  value={studentProfile.email}
+                  value={userProfile.email}
                   onChange={(e) =>
-                    setStudentProfile({
-                      ...studentProfile,
+                    setUserProfile({
+                      ...userProfile,
                       email: e.target.value,
                     })
                   }
@@ -160,18 +160,18 @@ function Login() {
                 <input
                 id="password"
                   type= {`${passwordDisplay ? 'text' : 'password'}`}
-                  value={studentProfile.password}
+                  value={userProfile.password}
                   onChange={(e) =>
-                    setStudentProfile({
-                      ...studentProfile,
+                    setUserProfile({
+                      ...userProfile,
                       password: e.target.value,
                     })
                   }
-                  className= 'outline-none w-full px-2 text-sm'
+                  className= 'outline-none w-full  px-2 text-sm'
                 />
 
                 <button type="button" onClick={() => setPasswordDisplay(!passwordDisplay)}>
-                  <img src={EyeIcon} alt="Toggle Password Visibility" className="ml-2" />
+                  <img src={EyeIcon} alt="Toggle Password Visibility" className="ml-2 " />
                 </button>
               </div>
             </div>
@@ -181,7 +181,7 @@ function Login() {
               <p className="flex items-center">
                 <img
                   src={
-                    studentProfile.password.length < 8 ? CheckCircle : Vector
+                    userProfile.password.length < 8 ? CheckCircle : Vector
                   }
                   className="mr-2"
                 />
@@ -189,14 +189,14 @@ function Login() {
               </p>
               <p className="flex items-center">
                 <img
-                  src={!checkCase(studentProfile.password) ? CheckCircle : Vector}
+                  src={!checkCase(userProfile.password) ? CheckCircle : Vector}
                   className="mr-2"
                 />
                 Uppercase letter
               </p>
               <p className="flex items-center">
                 <img
-                  src={!checkCase2(studentProfile.password) ? CheckCircle : Vector}
+                  src={!checkCase2(userProfile.password) ? CheckCircle : Vector}
                   className="mr-2"
                 />
                 Lowercase letter

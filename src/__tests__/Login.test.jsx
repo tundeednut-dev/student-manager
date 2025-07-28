@@ -1,21 +1,23 @@
 import { render, screen, fireEvent, waitFor} from "@testing-library/react";
-import { MemoryRouter } from "react-router-dom";
-import {useNavigate} from "react-router-dom"
+import {MemoryRouter, useNavigate } from "react-router-dom";
 import Login from "../pages/LoginPage";
 
- const mockNavigate = jest.fn()
-  jest.mock('react-router-dom', () => ({
-    ...jest.requireActual('react-router-dom'), useNavigate: () => mockNavigate
-  }))
+const mockNavigate = jest.fn()
+ jest.mock('react-router-dom', () => (
+  {...jest.requireActual('react-router-dom'),
+     useNavigate: () => mockNavigate,
+ })
+)
 
 
 describe("Login Page : UI Rendering", () => {
   test("shows that input field is in the document", () => {
+   
     render(
       <MemoryRouter>
-        <Login />
+        <Login/>
       </MemoryRouter>
-    );
+    )
     const fullNameInput = screen.getByLabelText(/full name/i);
     const userNameInput  = screen.getByLabelText(/username/i)
     const passWordInput = screen.getByLabelText(/password/i)
@@ -175,7 +177,7 @@ describe('Login Page: Storage', () => {
 
   await waitFor(() => {
     (expect(localStorage.setItem).toHaveBeenCalledWith(
-      "studentInfo",
+      "userInfo",
       JSON.stringify({
         fullName: "Josh Olatunde",
         userName: "josh007",
@@ -187,4 +189,3 @@ describe('Login Page: Storage', () => {
   })
   })
 });
-
