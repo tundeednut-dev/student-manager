@@ -38,7 +38,7 @@ If you have:
 - Or just want to say hello 👋
 
 Feel free to:
-- Open an [issue](https://github.com/tundeednut-dev/gradwise/issues)
+- Open an [issue](https://github.com/tundeednut-dev/student-manager/issues)
 - Submit a pull request
 - Or reach out directly via my contact info in the portfolio
 
