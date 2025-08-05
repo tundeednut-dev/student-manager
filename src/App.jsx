@@ -5,25 +5,24 @@ import Dashboard from './pages/Dashboard';
 import StudentRegForm from './pages/StudentRegForm';
 import StudentList from './pages/StudentList';
 import EditPage from './pages/EditPage';
-import { StudentContext } from './StudentContext';
+import { StudentProvider } from './StudentContext';
 
 
 
 function App() {
   return (
-  
+  <StudentProvider>
     <Router>
       <Routes>
         <Route path='/' element = {<HeroSection/>}/>
      <Route path='/authpage' element = {<Login/>}/>
-     <Route path='/dashboard' element = {<StudentContext><Dashboard/></StudentContext>}/>
-     <Route path='/regForm' element = {<StudentContext><StudentRegForm/></StudentContext>}/>
-     <Route path='/stulist' element = {<StudentContext><StudentList/></StudentContext>}/>
-     <Route path='/edit' element = {<StudentContext><EditPage/></StudentContext>}/>
+     <Route path='/dashboard' element = {<Dashboard/>}/>
+     <Route path='/regForm' element = {<StudentRegForm/>}/>
+     <Route path='/stulist' element = {<StudentList/>}/>
+     <Route path='/edit' element = {<EditPage/>}/>
       </Routes>
       </Router>
-
-
+</StudentProvider>
   );
 }
 

@@ -1,10 +1,10 @@
 import { useState, createContext, useContext, useEffect } from "react";
 
-export const studentContext = createContext()
+export const StudentContext = createContext({})
 
-export const useCreateStudent = ()  => useContext(studentContext)
+export const useStudentContext = ()  => useContext(StudentContext)
 
-export const StudentContext = ({children}) => {
+export const StudentProvider = ({children}) => {
 
 const [studentList, setStudentList] = useState([])
 const [edStudent, setEdStudent] = useState({})
@@ -23,6 +23,6 @@ useEffect(() => {
 },[])
 
 return(
-<studentContext.Provider value = {{studentList, storeStudent, edStudent, setEdStudent, setStudentList}}>{children}</studentContext.Provider>
+<StudentContext.Provider value = {{studentList, storeStudent, edStudent, setEdStudent, setStudentList}}>{children}</StudentContext.Provider>
 )
 }

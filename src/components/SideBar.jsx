@@ -21,7 +21,7 @@ function SideBar () {
           <div className="text-gray-400 font-semibold text-sm">OVERVIEW</div>
           <div className="mt-5 text-lg font-semibold"><Link to='/dashboard'>Dashboard</Link></div>
            <div className="mt-5 text-lg font-semibold"><Link to="/regform">Add Student</Link></div>
-           <div className="mt-5 text-lg font-semibold"><Link to="/stulist">Check Student Lis</Link>t</div>
+           <div className="mt-5 text-lg font-semibold"><Link to="/stulist">Check Student List</Link></div>
         </div>
       </div>
 

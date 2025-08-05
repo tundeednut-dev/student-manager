@@ -1,12 +1,12 @@
 import Navbar from "../components/Navbar"
 import addStudentImg from "../assets/addStudentImg.jpg"
 import studentListImg from "../assets/studentListLogo.jpg"
-import { useCreateStudent } from "../StudentContext"
+import { useStudentContext } from "../StudentContext"
 import { Link } from "react-router-dom"
 
 function Dashboard(){
 
-  const {studentList} = useCreateStudent()
+  const {studentList} = useStudentContext()
 
   return(
     <>

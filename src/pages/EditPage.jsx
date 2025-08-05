@@ -1,4 +1,4 @@
-import { useCreateStudent } from "../StudentContext";
+import { useStudentContext } from "../StudentContext";
 import Navbar from "../components/Navbar";
 import Select from "react-select"
 import { getNames } from "country-list"
@@ -11,7 +11,7 @@ const countryName = getNames().map((name) => ({
 }))
 
 function EditPage() {
-    const {edStudent, setEdStudent, studentList, setStudentList} = useCreateStudent()
+    const {edStudent, setEdStudent, studentList, setStudentList} = useStudentContext()
     const [err, setErr] = useState({})
     const [editMessage, setEditMessage] = useState(false)
     
@@ -78,8 +78,9 @@ const handleValue = (e) => {
                     className="flex flex-col space-y-8">
                 <div className="container space-x-4">
                             <div className="w-1/2 ">
-                            <label>First Name</label>
+                            <label htmlFor="firstName">First Name</label>
                         <input
+                        id="firstName"
                         type="text"
                         name="firstName"
                         value={edStudent?.firstName || ""}
@@ -88,8 +89,9 @@ const handleValue = (e) => {
                          <p>{err.firstName}</p>
                         </div>
                         <div className="w-1/2 ">
-                            <label>Last Name</label>
+                            <label htmlFor="lastName">Last Name</label>
                         <input
+                        id="lastName"
                         type="text"
                         name="lastName"
                         value={edStudent?.lastName || ""}
@@ -100,8 +102,9 @@ const handleValue = (e) => {
                         </div>
                         <div className="container space-x-8">
                         <div className="w-1/2">
-                        <label>Date of Birth</label>
-                        <input 
+                        <label htmlFor="dob">Date of Birth</label>
+                        <input
+                        id="dob"
                         type="date"
                         name="dob"
                         value={edStudent?.dob || ""}
@@ -110,12 +113,14 @@ const handleValue = (e) => {
                           <p>{err.dob}</p>
                         </div>
                         <div className="w-1/2">
-                        <label>Gender</label>
+                        <label htmlFor="gender">Gender</label>
                         <select
+                        id="gender"
                         name="gender"
                         value={edStudent?.gender || ""}
                         onChange={handleValue}
                         className=" w-full md:w-2/3 px-5 bg-gray-200 py-3 rounded-lg font-semibold outline-yellow-200">
+                             <option value={""} className="font-bold rounded">Select Gender</option>
                             <option className="font-bold rounded">Male</option>
                             <option className="font-bold rounded">Female</option>
                         </select>
@@ -124,8 +129,9 @@ const handleValue = (e) => {
                         </div>
                         <div className="container space-x-12">
                         <div className="w-1/2">
-                        <label>Age</label>
+                        <label htmlFor="age">Age</label>
                         <input
+                        id="age"
                         type="number"
                         name="age"
                         value={edStudent?.age || ""}
@@ -135,8 +141,10 @@ const handleValue = (e) => {
                           <p>{err.age}</p>
                         </div>
                         <div className="w-1/2">
-                        <label>Select Country</label>
+                        <label id="nation" htmlFor="country-label">Select Country</label>
                         <Select
+                        inputId="country-label"
+                        aria-labelledby="nation"
                         name="country"
                         options={countryName}
                         value={countryName.find(country => country.value === edStudent.country)}
@@ -150,8 +158,9 @@ const handleValue = (e) => {
                         </div>
                         </div>
                          <div className="w-full md:w-2/3 mx-auto">
-                        <label>Email</label>
+                        <label htmlFor="email">Email</label>
                         <input
+                        id="email"
                         name="email"
                         type="email"
                         value={edStudent?.email || ""}
@@ -162,8 +171,9 @@ const handleValue = (e) => {
                         </div>
                         <div className="container space-x-12">
                         <div className="w-1/2">
-                        <label>Phone Number</label>
+                        <label htmlFor="phone">Phone Number</label>
                         <input
+                        id="phone"
                         name="phone"
                         value={edStudent?.phone || ""}
                         onChange={handleValue}
@@ -173,8 +183,9 @@ const handleValue = (e) => {
                           <p>{err.phone}</p>
                         </div>
                          <div className="w-1/2">
-                        <label>Course</label>
+                        <label htmlFor="course">Course</label>
                         <input
+                        id="course" 
                         name="course"
                         value={edStudent?.course || ""}
                         onChange={handleValue}

@@ -1,9 +1,9 @@
  import Navbar from "../components/Navbar"
  import {Link} from "react-router-dom"
- import { useCreateStudent } from "../StudentContext"
+ import { useStudentContext } from "../StudentContext"
 
  function StudentList() {
-    const {setEdStudent, studentList, setStudentList} = useCreateStudent()
+    const {setEdStudent, studentList, setStudentList} = useStudentContext()
 
     const handleDelete = (stu) => {
       setStudentList((prev) => {

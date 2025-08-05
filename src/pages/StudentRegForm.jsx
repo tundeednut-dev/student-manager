@@ -2,7 +2,7 @@ import Navbar from "../components/Navbar"
 import Select from "react-select"
 import { getNames } from "country-list"
 import {useState} from "react"
-import { useCreateStudent } from "../StudentContext"
+import { useStudentContext } from "../StudentContext"
 
 
 const countryName = getNames().map((name) => ({
@@ -26,7 +26,7 @@ const [studentInfo, setStudentInfo] = useState({
     course: ""
 })
 
-const {storeStudent, studentList} = useCreateStudent()
+const {storeStudent} = useStudentContext()
 
 const [successMessage, setMessage] = useState(false)
 
@@ -75,8 +75,6 @@ if(!hasError) {
 }
 
 
-console.log(studentList)
-
 
 }
 
@@ -93,8 +91,9 @@ console.log(studentList)
          className="flex flex-col space-y-8">
         <div className="container space-x-4">
             <div className="w-1/2 ">
-            <label>First Name</label>
+            <label htmlFor= "firstName">First Name</label>
         <input
+        id = "firstName"
         type="text"
         name="firstName"
         value={studentInfo.firstName}
@@ -103,8 +102,9 @@ console.log(studentList)
       <p className="text-red-400">{error.firstName}</p>
         </div>
         <div className="w-1/2 ">
-            <label>Last Name</label>
+            <label htmlFor= "lastName">Last Name</label>
         <input
+        id= "lastName"
         type="text"
         name="lastName"
         value={studentInfo.lastName}
@@ -115,8 +115,9 @@ console.log(studentList)
         </div>
         <div className="container space-x-8">
         <div className="w-1/2">
-        <label>Date of Birth</label>
-        <input 
+        <label htmlFor= "dob">Date of Birth</label>
+        <input
+        id= "dob"
         type="date"
         name="dob"
         value={studentInfo.dob}
@@ -125,12 +126,14 @@ console.log(studentList)
          <p className="text-red-400">{error.dob}</p>
         </div>
         <div className="w-1/2">
-        <label>Gender</label>
+        <label htmlFor= "gender">Gender</label>
         <select
+        id= "gender"
         name="gender"
         value={studentInfo.gender}
          onChange={(e) => handleValue(e, studentInfo.gender)} 
         className=" w-full md:w-2/3 px-5 bg-gray-200 py-3 rounded-lg font-semibold outline-yellow-200">
+            <option value={""} className="font-bold rounded">Select Gender</option>
             <option className="font-bold rounded">Male</option>
             <option className="font-bold rounded">Female</option>
         </select>
@@ -139,8 +142,9 @@ console.log(studentList)
         </div>
         <div className="container space-x-12">
         <div className="w-1/2">
-        <label>Age</label>
+        <label htmlFor= "age">Age</label>
         <input
+        id= "age"
         type="number"
         name="age"
         value={studentInfo.age}onChange={handleValue}
@@ -149,8 +153,10 @@ console.log(studentList)
          <p className="text-red-400">{error.age}</p>
         </div>
         <div className="w-1/2">
-        <label>Select Country</label>
+        <label id= "country-label" htmlFor="nation">Select Country</label>
         <Select
+        inputId= "nation"
+        aria-labelledby="country-label"
         name="country"
         options={countryName}
         value={countryName.find(country => country.value === studentInfo.country)}
@@ -161,9 +167,10 @@ console.log(studentList)
          <p className="text-red-400">{error.country}</p>
         </div>
         </div>
-         <div className="w-full md:w-2/3 mx-auto">
-        <label>Email</label>
+         <div className="w-full md:w-2/3 mx-auto"> 
+        <label htmlFor= "email">Email</label>
         <input
+        id= "email"
         name="email"
         type="email"
         value={studentInfo.email}
@@ -174,8 +181,9 @@ console.log(studentList)
         </div>
         <div className="container space-x-12">
         <div className="w-1/2">
-        <label>Phone Number</label>
+        <label htmlFor= "phoneNo">Phone Number</label>
         <input
+        id= "phoneNo"
         name="phone"
         onChange={handleValue}
         value={studentInfo.phone}
@@ -185,8 +193,9 @@ console.log(studentList)
          <p className="text-red-400">{error.phone}</p>
         </div>
          <div className="w-1/2">
-        <label>Course</label>
+        <label htmlFor= "course">Course</label>
         <input
+        id= "course"
         name="course"
         onChange={handleValue}
         value={studentInfo.course}

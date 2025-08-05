@@ -154,7 +154,7 @@ test('shows an error when email field is empty', () => {
 describe('Login Page: Storage', () => {
   beforeEach(async () => {
   localStorage.clear();
-  jest.spyOn(window.localStorage.__proto__, 'setItem')
+  jest.spyOn(Storage.prototype, 'setItem')
   })
   test('stores authtoken in localStorge and navigate to dashboard', async () => {
    render(
